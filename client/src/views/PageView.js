@@ -8,6 +8,12 @@ define(function(require, exports, module) {
 	var InputSurface 		= require('famous/surfaces/InputSurface');
 	var FastClick 			= require('famous/inputs/FastClick');
 	var ContentView  	  = require('views/ContentView')
+	var GridView    	  = require('views/GridView')
+	var Modifier   		  = require("famous/core/Modifier");
+	var TouchSync   		= require("famous/inputs/TouchSync");
+	var Transitionable  = require("famous/transitions/Transitionable");
+	var Easing   				= require('famous/transitions/Easing');
+	var GridLayout 			= require("famous/views/GridLayout");
 	var Modifier    = require("famous/core/Modifier");
 	var TouchSync   = require("famous/inputs/TouchSync");
 	var Transitionable = require("famous/transitions/Transitionable");
@@ -57,73 +63,29 @@ define(function(require, exports, module) {
 	}
 
 	function _createBody() {
-		this.bodySurface = new Surface({
-			content: "To-Do List",
-			size: [undefined, undefined],
-			properties: {
-				textAlign: "center",
-				backgroundColor:"#D5D5DA"
-			}
-		});
-		this.layout.content.add(this.bodySurface);
+		// var grid = new GridLayout({
+		// 	dimensions: [2,2]
+		// });
+		// var gridSurfaces = [];
+		// grid.sequenceFrom(gridSurfaces);
+
+		// for (var i = 0; i < 8; i++) {
+		// 	gridSurfaces.push(new Surface ({
+		// 		content: 'panel' + (i + 1),
+		// 		size:[undefined, undefined],
+		// 		properties: {
+		// 			backgroundColor: 'hsl(' + (i*360/8) + ',100%, 50%)',
+		// 			color: '#404040',
+		// 			lineHeight: '200px',
+		// 			textAlign: 'center'
+		// 		}
+		// 	}));
+		// }
+		// var gridSurfaces = new GridView({
+		// 	dimensions : [2,2]
+		// });
+		this.layout.content.add(gridSurfaces);
 	}
-
-	sync.on('update', function(data) {
-		var currentPosition = position.get();
-		position.set([
-			currentPosition[0] + data.delta[0],
-			currentPosition[1] + data.delta[1]
-			]);
-	});
-
-	sync.on('end', function(data) {
-		var currentPosition = position.get();
-		position.set([
-			currentPosition[0] + data.delta[0],
-			currentPosition[1] + data.delta[1]
-			]);
-	});
-
-	function _createText() {
-		var textSurface = new Surface({
-			size: [true, true],
-			content: this.input,
-			properties: {
-				fontSize: "250%",
-				backgroundColor: "#F5F5F6"
-			}
-		});
-
-		var stateModifier = new StateModifier();
-
-		var positionModifier = new Modifier({
-			transform : function(){
-				var currentPosition = position.get();
-				console.log(currentPosition)
-				return Transform.translate(currentPosition[0], currentPosition[1], 0);
-			}
-		});
-
-		console.log("createdText!")
-		textSurface.pipe(sync);
-		this.layout.content.add(stateModifier).add(positionModifier).add(textSurface);
-	  stateModifier.setTransform(
-	  Transform.translate(100, 400, 0),
-	  { duration : 5000, curve: Easing.OutBack }
-);
-	}
-
-
-	var centerModifier = new Modifier({origin : [0.5, 0.5]});
-
-	PageView.prototype.addTextToBody = function() {
-		PageView.prototype.input = this.textInput.getValue();
-		if (this.input) {
-			console.log("input: ",this.input);
-			// add input to body content in grid layout?
-			_createText.call(this);
-		}
-	};
-
+	
 	module.exports = PageView;
 })

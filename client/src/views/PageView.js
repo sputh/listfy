@@ -14,6 +14,10 @@ define(function(require, exports, module) {
 	var Transitionable  = require("famous/transitions/Transitionable");
 	var Easing   				= require('famous/transitions/Easing');
 	var GridLayout 			= require("famous/views/GridLayout");
+	var Modifier    = require("famous/core/Modifier");
+	var TouchSync   = require("famous/inputs/TouchSync");
+	var Transitionable = require("famous/transitions/Transitionable");
+	var Easing = require('famous/transitions/Easing');
 
 	function PageView() {
 		View.apply(this, arguments);
@@ -82,6 +86,6 @@ define(function(require, exports, module) {
 		// });
 		this.layout.content.add(gridSurfaces);
 	}
-
+	
 	module.exports = PageView;
 })

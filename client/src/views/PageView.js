@@ -8,16 +8,12 @@ define(function(require, exports, module) {
 	var InputSurface 		= require('famous/surfaces/InputSurface');
 	var FastClick 			= require('famous/inputs/FastClick');
 	var ContentView  	  = require('views/ContentView')
-	var GridView    	  = require('views/GridView')
+	// var GridView    	  = require('views/GridView')
 	var Modifier   		  = require("famous/core/Modifier");
 	var TouchSync   		= require("famous/inputs/TouchSync");
 	var Transitionable  = require("famous/transitions/Transitionable");
 	var Easing   				= require('famous/transitions/Easing');
 	var GridLayout 			= require("famous/views/GridLayout");
-
-	var grid = new GridLayout({
-		dimensions: [3,2]
-	});
 
 	function PageView() {
 		View.apply(this, arguments);
@@ -63,11 +59,14 @@ define(function(require, exports, module) {
 	}
 
 	function _createBody() {
-		this.gridSurfaces = [];
-		grid.sequenceFrom(this.gridSurfaces);
+		var grid = new GridLayout({
+			dimensions: [3,2]
+		});
+		var gridSurfaces = [];
+		grid.sequenceFrom(gridSurfaces);
 
 		for (var i = 0; i < 8; i++) {
-			this.gridSurfaces.push(new Surface ({
+			gridSurfaces.push(new Surface ({
 				content: 'panel' + (i + 1),
 				size:[undefined, undefined],
 				properties: {
@@ -78,7 +77,7 @@ define(function(require, exports, module) {
 				}
 			}));
 		}
-		this.layout.content.add(this.gridSurfaces);
+		this.layout.content.add(gridSurfaces);
 	}
 
 	module.exports = PageView;

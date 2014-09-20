@@ -1,25 +1,24 @@
 define(function(require, exports, module) {
-	var Engine = require("famous/core/Engine");
-	var Surface = require("famous/core/Surface");
-	var GridLayout = require("famous/views/GridLayout");	
+	var View 				= require('famous/core/View');
+	var Engine 			= require("famous/core/Engine");
+	var Surface 		= require("famous/core/Surface");
+	var GridLayout 	= require("famous/views/GridLayout");	
 	
-	function GridView() {
+	function GridView(options) {
+		console.log(options.dimensions);
 		View.apply(this, arguments);
 
-		_createLayout.call(this);
-		_createHeader.call(this);
-		_createBody.call(this);
-
+		_createGrid.call(this);
 	}
 	var grid = new GridLayout({
-		dimensions: [2, 2]
+		dimensions: this.options
 	});
 
-	var surfaces = [];
-	grid.sequenceFrom(surfaces);
+	var gridSurfaces = [];
+	grid.sequenceFrom(gridSurfaces);
 
 	for(var i = 0; i < 8; i++) {
-		surfaces.push(new Surface({
+		gridSurfaces.push(new Surface({
 			content: "panel " + (i + 1),
 			size: [undefined, undefined],
 			properties: {
@@ -31,4 +30,4 @@ define(function(require, exports, module) {
 		}));
 	}
 	module.exports = GridView;
-}
+});

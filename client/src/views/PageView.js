@@ -8,7 +8,7 @@ define(function(require, exports, module) {
 	var InputSurface 		= require('famous/surfaces/InputSurface');
 	var FastClick 			= require('famous/inputs/FastClick');
 	var ContentView  	  = require('views/ContentView')
-	// var GridView    	  = require('views/GridView')
+	var GridView    	  = require('views/GridView')
 	var Modifier   		  = require("famous/core/Modifier");
 	var TouchSync   		= require("famous/inputs/TouchSync");
 	var Transitionable  = require("famous/transitions/Transitionable");
@@ -59,24 +59,27 @@ define(function(require, exports, module) {
 	}
 
 	function _createBody() {
-		var grid = new GridLayout({
-			dimensions: [3,2]
-		});
-		var gridSurfaces = [];
-		grid.sequenceFrom(gridSurfaces);
+		// var grid = new GridLayout({
+		// 	dimensions: [2,2]
+		// });
+		// var gridSurfaces = [];
+		// grid.sequenceFrom(gridSurfaces);
 
-		for (var i = 0; i < 8; i++) {
-			gridSurfaces.push(new Surface ({
-				content: 'panel' + (i + 1),
-				size:[undefined, undefined],
-				properties: {
-					backgroundColor: 'hsl(' + (i*360/8) + ',100%, 50%)',
-					color: '#404040',
-					lineHeight: '200px',
-					textAlign: 'center'
-				}
-			}));
-		}
+		// for (var i = 0; i < 8; i++) {
+		// 	gridSurfaces.push(new Surface ({
+		// 		content: 'panel' + (i + 1),
+		// 		size:[undefined, undefined],
+		// 		properties: {
+		// 			backgroundColor: 'hsl(' + (i*360/8) + ',100%, 50%)',
+		// 			color: '#404040',
+		// 			lineHeight: '200px',
+		// 			textAlign: 'center'
+		// 		}
+		// 	}));
+		// }
+		// var gridSurfaces = new GridView({
+		// 	dimensions : [2,2]
+		// });
 		this.layout.content.add(gridSurfaces);
 	}
 

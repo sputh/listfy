@@ -8,11 +8,12 @@ define(function(require, exports, module) {
 	var InputSurface 		= require('famous/surfaces/InputSurface');
 	var FastClick 			= require('famous/inputs/FastClick');
 	var ContentView  	  = require('views/ContentView')
-	var Modifier    = require("famous/core/Modifier");
-	var TouchSync   = require("famous/inputs/TouchSync");
-	var Transitionable = require("famous/transitions/Transitionable");
-	var Easing = require('famous/transitions/Easing');
-	var GridLayout = require("famous/views/GridLayout");
+	var GridView    	  = require('views/GridView')
+	var Modifier   		  = require("famous/core/Modifier");
+	var TouchSync   		= require("famous/inputs/TouchSync");
+	var Transitionable  = require("famous/transitions/Transitionable");
+	var Easing   				= require('famous/transitions/Easing');
+	var GridLayout 			= require("famous/views/GridLayout");
 
 	var grid = new GridLayout({
 		dimensions: [3,2]

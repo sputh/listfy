@@ -65,8 +65,8 @@ define(function(require, exports, module) {
 		this.gridSurfaces = [];
 		grid.sequenceFrom(this.gridSurfaces);
 
-		for (var i = 0; i < (grid[0] * grid[1]); i++) {
-			gridSurfaces.push(new Surface ({
+		for (var i = 0; i < 8; i++) {
+			this.gridSurfaces.push(new Surface ({
 				content: 'panel' + (i + 1),
 				size:[undefined, undefined],
 				properties: {

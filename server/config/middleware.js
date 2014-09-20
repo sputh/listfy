@@ -16,5 +16,5 @@ module.exports = function(app, express) {
     res.redirect('/');
   });
 
-  
-}
+  require('../sports/sportsRoutes.js')
+};

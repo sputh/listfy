@@ -73,7 +73,7 @@ define(function(require, exports, module) {
 	  		content: "panel " + (i + 1),
 	  		size: [undefined, undefined],
 	  		properties: {
-	  			backgroundColor: "hsl(" + (i * 360 / 50) + ", 100%, 50%)",
+	  			backgroundColor: "hsl(" + (i * 300 / 6) + ","+ (i * 10) + "%, "+ (i * 18) +"%)",
 	  			color: "#404040",
 	  			lineHeight: '200px',
 	  			textAlign: 'center'

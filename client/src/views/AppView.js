@@ -31,7 +31,7 @@ define(function(require, exports, module) {
   			return Transform.translate(this.pageViewPos.get(), 0, 0);
   		}.bind(this)
   	});
-  	this._add(this.pageModifier).add(this.pageView);
+  	this.add(this.pageView);
   }
 
   module.exports = AppView;

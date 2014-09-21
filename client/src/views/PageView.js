@@ -62,14 +62,14 @@ define(function(require, exports, module) {
 
 	function _createBody() {
 	  var grid = new GridLayout({
-	  	dimensions: [4, 2]
+	  	dimensions: [3, 2]
 	  });
 
-	  var surfaces = [];
-	  grid.sequenceFrom(surfaces);
+	  var gridView = [];
+	  grid.sequenceFrom(gridView);
 
-	  for(var i = 0; i < 50; i++) {
-	  	surfaces.push(new Surface({
+	  for(var i = 0; i < 8; i++) {
+	  	var temp = new Surface({
 	  		content: "panel " + (i + 1),
 	  		size: [undefined, undefined],
 	  		properties: {
@@ -78,18 +78,21 @@ define(function(require, exports, module) {
 	  			lineHeight: '200px',
 	  			textAlign: 'center'
 	  		}
-	  	}));
+	  	});
+	  	gridView.push(temp);
+	  	// this.layout.content.add(temp);
 	  }
 	  var backgroundSurface = new Surface({
-			content: "L I S T I F Y",
+			content: "L O W   L I S T I F Y",
 			properties: {
 				backgroundColor: "#9787A3",
 				textAlign: "center",
 			}
 		});
 
-		this.layout.content.add(backgroundSurface);
+		console.log('gridView: ', grid)
 		this.layout.content.add(grid);
+		// this.layout.content.add(backgroundSurface);
 	}
 	module.exports = PageView;
 })

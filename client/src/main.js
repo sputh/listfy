@@ -4,13 +4,13 @@ define(function(require, exports, module) {
 	var Engine = require('famous/core/Engine');
 	var AppView = require('views/AppView');
 	
-	// var Surface = require("famous/core/Surface");
-	// var GridLayout = require("famous/views/GridLayout");
+	var Surface = require("famous/core/Surface");
+	var GridLayout = require("famous/views/GridLayout");
 
 	var mainContext = Engine.createContext();
   var appView = new AppView();
 
-  // mainContext.add(appView);
+  mainContext.add(appView);
   // var grid = new GridLayout({
   // 	dimensions: [4, 2]
   // });
@@ -31,5 +31,5 @@ define(function(require, exports, module) {
   // 	}));
   // }
 
-  mainContext.add(appView);
+  // mainContext.add(grid);
 });

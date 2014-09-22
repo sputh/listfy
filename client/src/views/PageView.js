@@ -8,6 +8,7 @@ define(function(require, exports, module) {
 	var InputSurface 		= require('famous/surfaces/InputSurface');
 	var FastClick 			= require('famous/inputs/FastClick');
 	var ContentView  	  = require('views/ContentView')
+	var GridView  		  = require('views/GridView')
 	var Modifier   		  = require("famous/core/Modifier");
 	var TouchSync   		= require("famous/inputs/TouchSync");
 	var Transitionable  = require("famous/transitions/Transitionable");
@@ -25,6 +26,7 @@ define(function(require, exports, module) {
 		_createHeader.call(this);
 		_createBody.call(this);
 
+		_setListeners.call(this);
 	}
 
 	PageView.prototype = Object.create(View.prototype);
@@ -68,9 +70,18 @@ define(function(require, exports, module) {
 	  var gridView = [];
 	  grid.sequenceFrom(gridView);
 
+	  imgObject = {
+	  	1: './assets/pic1.jpg',
+	  	2: './assets/pic2.jpg',
+	  	3: './assets/pic3.jpg',
+	  	4: './assets/pic4.jpg',
+	  	5: './assets/pic5.jpg',
+	  	6: './assets/pic6.jpg'
+	  };
+
 	  for(var i = 0; i < 8; i++) {
-	  	var temp = new Surface({
-	  		content: "panel " + (i + 1),
+	  	this.gridBox = new ImageSurface({
+	  		content: imgObject[1+i],
 	  		size: [undefined, undefined],
 	  		properties: {
 	  			backgroundColor: "hsl(" + (i * 300 / 6) + ","+ (i * 10) + "%, "+ (i * 18) +"%)",
@@ -79,20 +90,18 @@ define(function(require, exports, module) {
 	  			textAlign: 'center'
 	  		}
 	  	});
-	  	gridView.push(temp);
-	  	// this.layout.content.add(temp);
-	  }
-	  var backgroundSurface = new Surface({
-			content: "L O W   L I S T I F Y",
-			properties: {
-				backgroundColor: "#9787A3",
-				textAlign: "center",
-			}
-		});
 
-		console.log('gridView: ', grid)
+	  	function _setListeners() {
+	  		this.gridBox.on('click', function() {
+	  			console.log(i);
+	  			this._eventOutput.emit('flipBoard');
+	  		}.bind(this));
+	  		this.grid.pipe(this._eventOutput);
+	  	}
+	  	gridView.push(this.gridBox);
+	  }
+
 		this.layout.content.add(grid);
-		// this.layout.content.add(backgroundSurface);
 	}
 	module.exports = PageView;
 })

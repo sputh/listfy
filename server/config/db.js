@@ -27,4 +27,18 @@ db.knex.schema.hasTable('nfl').then(function(exists) {
   }
 });
 
+db.knex.schema.hasTable('ncaaf').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('ncaaf', function (schedule) {
+      schedule.increments('id').primary();
+      schedule.string('date', 100);
+      schedule.string('hometeam', 100);
+      schedule.string('awayteam', 100);
+      schedule.string('channel', 100);
+    }).then(function() {
+      console.log('nfl table created');
+    });
+  }
+});
+
 module.exports = db;

@@ -27,7 +27,7 @@ var weeks = {
 
 // When cron job runs, it will check the current date and return the associated week
 var date = new Date();
-var week = (date.getMonth() + 1).toString() + (date.getDate() + 1).toString();
+var week = (date.getMonth() + 1).toString() + date.getDate().toString();
 
 runs job every Tuesday at 2am
 new cron('00 00 2 * * 2', function() {

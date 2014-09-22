@@ -6,6 +6,7 @@ var apiKey = 'gzwk495a6tuuhjsg2zk5sumd'; // will store this is separate keys fil
 var cron = require('cron').CronJob;
 
 
+// Initialize the required inputs for type of http request to the sportsdata API
 var NFLinit = NFL.init('t', 1, apiKey, '2014', 'REG');
 
 
@@ -25,4 +26,3 @@ var NFLinit = NFL.init('t', 1, apiKey, '2014', 'REG');
         })
     });
   }
-  

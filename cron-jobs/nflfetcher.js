@@ -35,7 +35,7 @@ new cron('00 00 2 * * 2', function() {
       NFL.getWeeklySchedule(weeks[week], function(err, schedule) {
         for (var i = 0; i < schedule.games.game.length; i++) {
           var weeklySchedule = new nflData({
-            date: schedule.games.game[i].$.scheduled,
+            date: schedule.games.game[i].$.scheduled.slice(0, schedule.games.game[i].$.scheduled.indexOf('T')),
             hometeam: schedule.games.game[i].$.home,
             awayteam: schedule.games.game[i].$.away,
             channel: schedule.games.game[i].broadcast[0].$.network

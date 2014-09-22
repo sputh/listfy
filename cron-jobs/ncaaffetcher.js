@@ -9,11 +9,6 @@ var apiKey = 'huwkschxnrvkqsme9y5bzktj'; // will store this is separate keys fil
 // Initialize the required inputs for type of http request to the sportsdata API
 var NCAAFinit = NCAAF.init('t', 1, '2014', 'REG', apiKey);
 
-
-NCAAF.getWeeklySchedule(1, function(err, schedule) {
-  console.log(schedule);
-})
-
 // // Creating weekly associations based on date of cron job
 // var weeks = {
 //   '923': 4,
@@ -53,3 +48,29 @@ NCAAF.getWeeklySchedule(1, function(err, schedule) {
 //       });
 //     })
 // }, null, true, "America/Los_Angeles");
+
+
+
+function test() {
+  db.knex('ncaaf').truncate()
+    .then(function() {
+      NCAAF.getWeeklySchedule(4, function(err, schedule) {
+        // for (var i = 0; i < schedule.games.game.length; i++) {
+          var weeklySchedule = new ncaafData({
+            date: schedule.games.game[i].$.scheduled.slice(0, schedule.games.game[i].$.scheduled.indexOf('T')),
+            hometeam: schedule.games.game[i].$.home,
+            awayteam: schedule.games.game[i].$.away,
+            channel: schedule.games.game[i].broadcast[0].$.network
+          })
+          weeklySchedule.save()
+            .then(function(game) {
+              console.log('saved properly');
+            })
+        });
+    })
+};
+
+test();
+
+
+

@@ -21,6 +21,6 @@ module.exports = function(app, express) {
 
   // invoke exported router using express router for each
   // individual API
-  require('../sports/sportsRoutes.js')(nflSchedule);
+  require('../nfl/nflRoutes.js')(nflSchedule);
   // ***** ADD controller and route files and export them here
 };

@@ -1,5 +1,6 @@
 // server.js handles express requirements
 var app = require('./server/server.js');
+var mysql = require('./server/config/db');
 
 
 var port = 8000; // will be dynamic to handle deployment

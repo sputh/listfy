@@ -6,11 +6,11 @@ module.exports = function(app, express) {
   app.use(express.static(__dirname + '/../../client'));
 
   // create express router for each API
-  var sportsSchedule = express.Router();
+  var nflSchedule = express.Router();
   // ***** ADD new router here
 
   // define which routes are assigned to each route
-  app.use('/sports', sportsSchedule);
+  app.use('/nfl', nflSchedule);
   // ***** ADD base route for each API here
 
 
@@ -21,6 +21,6 @@ module.exports = function(app, express) {
 
   // invoke exported router using express router for each
   // individual API
-  require('../sports/sportsRoutes.js')(sportsSchedule);
+  require('../sports/sportsRoutes.js')(nflSchedule);
   // ***** ADD controller and route files and export them here
 };

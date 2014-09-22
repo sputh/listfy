@@ -25,3 +25,4 @@ var NFLinit = NFL.init('t', 1, apiKey, '2014', 'REG');
         })
     });
   }
+  

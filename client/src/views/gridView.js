@@ -10,24 +10,27 @@ define(function(require, exports, module) {
 
 		_createGrid.call(this);
 	}
-	var grid = new GridLayout({
-		dimensions: this.options
-	});
 
-	var gridSurfaces = [];
-	grid.sequenceFrom(gridSurfaces);
+	function _createGrid() {
+		var grid = new GridLayout({
+			dimensions: this.options
+		});
 
-	for(var i = 0; i < 8; i++) {
-		gridSurfaces.push(new Surface({
-			content: "panel " + (i + 1),
-			size: [undefined, undefined],
-			properties: {
-				backgroundColor: "hsl(" + (i * 360 / 8) + ", 100%, 50%)",
-				color: "#404040",
-				lineHeight: '200px',
-				textAlign: 'center'
-			}
-		}));
+		var gridSurfaces = [];
+		grid.sequenceFrom(gridSurfaces);
+
+		for(var i = 0; i < 8; i++) {
+			gridSurfaces.push(new Surface({
+				content: "panel " + (i + 1),
+				size: [undefined, undefined],
+				properties: {
+					backgroundColor: "hsl(" + (i * 360 / 8) + ", 100%, 50%)",
+					color: "#404040",
+					lineHeight: '200px',
+					textAlign: 'center'
+				}
+			}));
+		}
 	}
 	module.exports = GridView;
 });

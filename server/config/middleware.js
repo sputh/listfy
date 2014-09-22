@@ -7,10 +7,12 @@ module.exports = function(app, express) {
 
   // create express router for each API
   var nflSchedule = express.Router();
+  var ncaafSchedule = express.Router();
   // ***** ADD new router here
 
   // define which routes are assigned to each route
   app.use('/nfl', nflSchedule);
+  app.use('/ncaaf', ncaafSchedule);
   // ***** ADD base route for each API here
 
 
@@ -22,5 +24,6 @@ module.exports = function(app, express) {
   // invoke exported router using express router for each
   // individual API
   require('../nfl/nflRoutes.js')(nflSchedule);
+  require('../ncaaf/ncaafRoutes')(ncaafSchedule);
   // ***** ADD controller and route files and export them here
 };

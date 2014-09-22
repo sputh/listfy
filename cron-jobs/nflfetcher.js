@@ -10,6 +10,7 @@ var apiKey = 'gzwk495a6tuuhjsg2zk5sumd'; // will store this is separate keys fil
 var NFLinit = NFL.init('t', 1, apiKey, '2014', 'REG');
 
 // Creating weekly associations based on date of cron job
+// Week numbers are directly related to actual week (i.e. 0 is not an index)
 var weeks = {
   '923': 4,
   '930': 5,

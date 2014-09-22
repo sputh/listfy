@@ -10,8 +10,9 @@ var apiKey = 'huwkschxnrvkqsme9y5bzktj'; // will store this is separate keys fil
 var NCAAFinit = NCAAF.init('t', 1, '2014', 'REG', apiKey);
 
 // // Creating weekly associations based on date of cron job
+// // Weeks in ncaaf are shifts down (i.e. 0 is considered an index)
 // var weeks = {
-//   '923': 4,
+//   '922': 5,
 //   '930': 5,
 //   '107': 6,
 //   '1014': 7,
@@ -29,32 +30,10 @@ var NCAAFinit = NCAAF.init('t', 1, '2014', 'REG', apiKey);
 // var week = (date.getMonth() + 1).toString() + (date.getDate() + 1).toString();
 
 // runs job every Tuesday at 2am
-// new cron('00 00 2 * * 2', function() {
-//   db.knex('nfl').truncate()
-//     .then(function() {
-//       NFL.getWeeklySchedule(weeks[week], function(err, schedule) {
-//         for (var i = 0; i < schedule.games.game.length; i++) {
-//           var weeklySchedule = new nflData({
-//             date: schedule.games.game[i].$.scheduled,
-//             hometeam: schedule.games.game[i].$.home,
-//             awayteam: schedule.games.game[i].$.away,
-//             channel: schedule.games.game[i].broadcast[0].$.network
-//           })
-//           weeklySchedule.save()
-//             .then(function(game) {
-//               console.log('saved properly');
-//             })
-//         }
-//       });
-//     })
-// }, null, true, "America/Los_Angeles");
-
-
-
-function test() {
+new cron('00 00 2 * * 2', function() {
   db.knex('ncaaf').truncate()
     .then(function() {
-      NCAAF.getWeeklySchedule(4, function(err, schedule) {
+      NCAAF.getWeeklySchedule(5, function(err, schedule) {
         // for (var i = 0; i < schedule.games.game.length; i++) {
           var weeklySchedule = new ncaafData({
             date: schedule.games.game[i].$.scheduled.slice(0, schedule.games.game[i].$.scheduled.indexOf('T')),
@@ -68,9 +47,26 @@ function test() {
             })
         });
     })
-};
+}, null, true, "America/Los_Angeles");
+
+function test() {
+  db.knex('ncaaf').truncate()
+    .then(function() {
+      NCAAF.getWeeklySchedule(5, function(err, schedule) {
+        for (var i = 0; i < schedule.games.game.length; i++) {
+          var weeklySchedule = new ncaafData({
+            date: schedule.games.game[i].$.scheduled.slice(0, schedule.games.game[i].$.scheduled.indexOf('T')),
+            hometeam: schedule.games.game[i].$.home,
+            awayteam: schedule.games.game[i].$.away,
+            channel: schedule.games.game[i].broadcast[0].$.network
+          })
+          weeklySchedule.save()
+            .then(function(game) {
+              console.log('saved properly');
+            })
+        }
+      });
+    })
+}
 
 test();
-
-
-

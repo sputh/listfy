@@ -25,25 +25,47 @@ var weeks = {
 };
 
 var date = new Date();
-var week = (date.getMonth() + 1).toString() + (date.getDate()+1).toString();
+var week = (date.getMonth() + 1).toString() + (date.getDate() + 1).toString();
 
 // runs job every Tuesday at 2am
-new cron('00 00 2 * * 2', function() {
+// new cron('00 00 2 * * 2', function() {
+//   db.knex('nfl').truncate()
+//     .then(function() {
+//       NFL.getWeeklySchedule(weeks[week], function(err, schedule) {
+//         for (var i = 0; i < schedule.games.game.length; i++) {
+//           var weeklySchedule = new nflData({
+//             date: schedule.games.game[i].$.scheduled,
+//             hometeam: schedule.games.game[i].$.home,
+//             awayteam: schedule.games.game[i].$.away,
+//             channel: schedule.games.game[i].broadcast[0].$.network
+//           })
+//           weeklySchedule.save()
+//             .then(function(game) {
+//               console.log('saved properly');
+//             })
+//         }
+//       });
+//     })
+// }, null, true, "America/Los_Angeles");
+
+function test() {
   db.knex('nfl').truncate()
-    .then(function() {
-      NFL.getWeeklySchedule(weeks[week], function(err, schedule) {
-        for (var i = 0; i < schedule.games.game.length; i++) {
-          var weeklySchedule = new nflData({
-            date: schedule.games.game[i].$.scheduled,
-            hometeam: schedule.games.game[i].$.home,
-            awayteam: schedule.games.game[i].$.away,
-            channel: schedule.games.game[i].broadcast[0].$.network
+  .then(function() {
+    NFL.getWeeklySchedule(weeks[week], function(err, schedule) {
+      for (var i = 0; i < schedule.games.game.length; i++) {
+        var weeklySchedule = new nflData({
+          date: schedule.games.game[i].$.scheduled,
+          hometeam: schedule.games.game[i].$.home,
+          awayteam: schedule.games.game[i].$.away,
+          channel: schedule.games.game[i].broadcast[0].$.network
+        })
+        weeklySchedule.save()
+          .then(function(game) {
+            console.log('saved properly');
           })
-          weeklySchedule.save()
-            .then(function(game) {
-              console.log('saved properly');
-            })
-        }
-      });
-    })
-}, null, true, "America/Los_Angeles");
+      }
+    });
+  })
+}
+
+test();

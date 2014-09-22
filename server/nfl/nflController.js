@@ -5,9 +5,7 @@ var db = require('../config/db');
 
 
 // ******* ERROR, END OF WEEK/END OF SUNDAY GAMES ARE PUSHED A DAY FORWARD
-// NFL.getWeeklySchedule(3, function(err, schedule) {
-//   schedule.games.game[12];
-// });
+//         Alter the json data on the client side?
 
 
 module.exports = {
@@ -18,6 +16,5 @@ module.exports = {
         res.send(data);
       })
   }
-
 
 };

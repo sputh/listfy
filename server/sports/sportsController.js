@@ -10,9 +10,9 @@ var apiKey = 'gzwk495a6tuuhjsg2zk5sumd'; // will store this is separate keys fil
 var NFLinit = NFL.init('t', 1, apiKey, '2014', 'REG');
 
 // ******* ERROR, END OF WEEK/END OF SUNDAY GAMES ARE PUSHED A DAY FORWARD
-NFL.getWeeklySchedule(3, function(err, schedule) {
-  console.log(schedule.games.game[12]);
-})
+// NFL.getWeeklySchedule(3, function(err, schedule) {
+//   schedule.games.game[12];
+// });
 
 
 module.exports = {
@@ -23,8 +23,10 @@ module.exports = {
 
 
   test: function(req, res) {
-    res.redirect('/');
-    console.log('worked')
+    NFL.getWeeklySchedule(3, function(err, schedule) {
+      console.log(schedule.games.game[0].$)
+      res.send(schedule.games.game[12]);
+    });
   },
 
 

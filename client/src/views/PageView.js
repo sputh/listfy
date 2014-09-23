@@ -60,10 +60,13 @@ define(function(require, exports, module) {
 	}
 
 	function _createGrid() {
+
+		// defines Grid Layout
 		var grid = new GridLayout({
 			dimensions: [3, 2]
 		});
 
+		// creates an array of all the surfaces of the grid
 		var gridView = [];
 		grid.sequenceFrom(gridView);
 
@@ -77,16 +80,27 @@ define(function(require, exports, module) {
 		};
 
 		for(var i = 1; i < 8; i++) {
-			this.gridBox = new Surface({
+			// this.gridBox = new Surface({
+	  // 		// content: imgObject[1+i],
+	  // 		content: i,
+	  // 		size: [undefined, undefined],
+	  // 		properties: {
+	  // 			backgroundImage: 'url('+	imgObject[i] + ')',
+	  // 			backgroundRepeat: 'no-repeat',
+	  // 			backgroundSize: '100% 100%',
+	  // 			// backgroundColor: "hsl(" + (i * 300 / 6) + ","+ (i * 10) + "%, "+ (i * 18) +"%)",
+	  // 			color: "#404040",
+	  // 			lineHeight: '200px',
+	  // 			textAlign: 'center',
+	  // 			class: i
+	  // 		}
+	  // 	});
+
+			this.gridBox = new ImageSurface({
 	  		// content: imgObject[1+i],
-	  		content: i,
+	  		content: imgObject[i],
 	  		size: [undefined, undefined],
 	  		properties: {
-	  			backgroundImage: 'url('+	imgObject[i] + ')',
-	  			backgroundRepeat: 'no-repeat',
-	  			backgroundSize: '100% 100%',
-	  			// backgroundColor: "hsl(" + (i * 300 / 6) + ","+ (i * 10) + "%, "+ (i * 18) +"%)",
-	  			color: "#404040",
 	  			lineHeight: '200px',
 	  			textAlign: 'center',
 	  			class: i
@@ -103,7 +117,8 @@ define(function(require, exports, module) {
 		  	function _listening() {
 		  		this.on('click', function() {
 		  		  this.eventHandler.downstream.push('flipBoard');
-		  			console.log(this.content);
+		  			console.log(this);
+		  			console.log(this.properties.class);
 		  		}.bind(this))
 		  	};
 		  	_listening.call(holder);

@@ -80,22 +80,6 @@ define(function(require, exports, module) {
 		};
 
 		for(var i = 1; i < 8; i++) {
-			// this.gridBox = new Surface({
-	  // 		// content: imgObject[1+i],
-	  // 		content: i,
-	  // 		size: [undefined, undefined],
-	  // 		properties: {
-	  // 			backgroundImage: 'url('+	imgObject[i] + ')',
-	  // 			backgroundRepeat: 'no-repeat',
-	  // 			backgroundSize: '100% 100%',
-	  // 			// backgroundColor: "hsl(" + (i * 300 / 6) + ","+ (i * 10) + "%, "+ (i * 18) +"%)",
-	  // 			color: "#404040",
-	  // 			lineHeight: '200px',
-	  // 			textAlign: 'center',
-	  // 			class: i
-	  // 		}
-	  // 	});
-
 			this.gridBox = new ImageSurface({
 	  		// content: imgObject[1+i],
 	  		content: imgObject[i],
@@ -106,7 +90,6 @@ define(function(require, exports, module) {
 	  			class: i
 	  		}
 	  	});
-
 	  	gridView.push(this.gridBox);
 	  }
 

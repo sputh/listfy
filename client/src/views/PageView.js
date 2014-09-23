@@ -20,6 +20,8 @@ define(function(require, exports, module) {
 	var Easing 					= require('famous/transitions/Easing');
 
 	eventHandler = new EventHandler();
+	// defines grid view on the same scope as PageView to allow accessibility
+	var gridView = [];
 
 	function PageView() {
 		View.apply(this, arguments);
@@ -70,7 +72,6 @@ define(function(require, exports, module) {
 		});
 
 		// creates an array of all the surfaces of the grid
-		var gridView = [];
 		grid.sequenceFrom(gridView);
 
 		imgObject = {
@@ -126,7 +127,7 @@ define(function(require, exports, module) {
 	PageView.prototype.animateContentIn = function(e) {
 		console.log('animateContentIn');
 		console.log('this2: ', this);
-		// this.layout.content.set(gridView[2]);
+		this.layout.content.set(gridView[2]);
 
 		  // this.contentModifier = new Modifier({
 		  // 	transform: Transform.translate(0, this.options.screenHeight, 50)

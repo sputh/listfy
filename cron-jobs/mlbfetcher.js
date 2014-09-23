@@ -10,7 +10,7 @@ var MLBinit = MLB.init('t', 4, apiKey, '2014');
 
 var date = new Date();
 // runs job everyday at
-new cron('00 00 2 * * 2', function() {
+new cron('00 00 2 * * *', function() {
   db.knex('mlb').truncate()
     .then(function() {
       MLB.getStandings(function(err, schedule) {

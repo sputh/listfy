@@ -129,8 +129,8 @@ define(function(require, exports, module) {
 	  // this.contentModifier = new Modifier({
 	  // 	transform: Transform.translate(0, this.options.screenHeight, 50)
 	  // });
-this.layout.content.add(grid);
-}
+		this.layout.content.add(grid);
+	}
 
 
 PageView.prototype.animateContentIn = function(e) {

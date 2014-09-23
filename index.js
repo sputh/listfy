@@ -3,10 +3,12 @@ var app = require('./server/server.js');
 var mysql = require('./server/config/db');
 
 
-var port = 8000; // will be dynamic to handle deployment
-var url = 'localhost'; // will be dynamic to handle deploymen
+var port = process.env.PORT || 8000;
+var url = process.env.URL || 'localhost';
 
 
 app.listen(port, url);
 
 console.log('Listening on port: ', port);
+
+// listifyAOGqMkNw0

@@ -1,11 +1,11 @@
-var NCAAF = require('./ncaafModel');
+var MLB = require('./mlbModel');
 var db = require('../config/db');
 
 module.exports = {
-  fetchWeeklySchedule: function(req, res) {
-    db.knex.select().table('ncaaf')
+  fetchMLBStandings: function(req, res) {
+    db.knex.select().table('mlb')
       .then(function(data) {
         res.send(data);
       })
   }
-}
+};

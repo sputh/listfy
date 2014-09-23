@@ -9,12 +9,10 @@ var db = require('../config/db');
 
 
 module.exports = {
-
   fetchWeeklySchedule: function(req, res) {
     db.knex.select().table('nfl')
       .then(function(data) {
         res.send(data);
       })
   }
-
 };

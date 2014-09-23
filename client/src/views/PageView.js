@@ -6,7 +6,7 @@ define(function(require, exports, module) {
 	var HeaderFooter    = require('famous/views/HeaderFooterLayout');
 	var ImageSurface    = require('famous/surfaces/ImageSurface');
 	var InputSurface 		= require('famous/surfaces/InputSurface');
-	var FastClick 			= require('famous/inputs/FastClick');
+	var EventHandler = require('famous/core/EventHandler');
 	var ContentView  	  = require('views/ContentView')
 	var GridView  		  = require('views/GridView')
 	var Modifier   		  = require("famous/core/Modifier");
@@ -25,6 +25,8 @@ define(function(require, exports, module) {
 		_createLayout.call(this);
 		_createHeader.call(this);
 		_createGrid.call(this);
+
+		console.log('this1: ', this)
 
 		// _setListeners.call(this);
 	}
@@ -79,8 +81,13 @@ define(function(require, exports, module) {
 			6: './assets/pic6.jpg'
 		};
 
+		var gridBox;
+
+		// gridBox.on('click', function(){
+		// 	console.log('hi');
+		// })
 		for(var i = 1; i < 8; i++) {
-			this.gridBox = new ImageSurface({
+			gridBox = new ImageSurface({
 	  		// content: imgObject[1+i],
 	  		content: imgObject[i],
 	  		size: [undefined, undefined],
@@ -90,7 +97,7 @@ define(function(require, exports, module) {
 	  			class: i
 	  		}
 	  	});
-	  	gridView.push(this.gridBox);
+	  	gridView.push(gridBox);
 	  }
 
 	  function _setListeners() {
@@ -99,9 +106,10 @@ define(function(require, exports, module) {
 		  	// console.log(gridView[i]);
 		  	function _listening() {
 		  		this.on('click', function() {
+		  			eventHandler.emit('hi');
 		  		  this.eventHandler.downstream.push('flipBoard');
-		  			console.log(this);
 		  			console.log(this.properties.class);
+		  			_animateContentIn.call(this);
 		  		}.bind(this))
 		  	};
 		  	_listening.call(holder);
@@ -109,18 +117,18 @@ define(function(require, exports, module) {
 	  }
 	  _setListeners.call(this);
 
-	  // this.contentModifier = new Modifier({
-	  // 	transform: Transform.translate(0, this.options.screenHeight, 50)
-	  // });
 		this.layout.content.add(grid);
 	}
 
 
-PageView.prototype.animateContentIn = function(e) {
+function _animateContentIn(e) {
 	console.log('animateContentIn');
+	console.log('this2: ', this);
+	// this.layout.content.set(gridView[2]);
 
-	this.options.index = e.index;
-
+	  // this.contentModifier = new Modifier({
+	  // 	transform: Transform.translate(0, this.options.screenHeight, 50)
+	  // });
 }
 
 module.exports = PageView;

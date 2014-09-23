@@ -26,7 +26,7 @@ define(function(require, exports, module) {
 		_createHeader.call(this);
 		_createBody.call(this);
 
-		_setListeners.call(this);
+		// _setListeners.call(this);
 	}
 
 	PageView.prototype = Object.create(View.prototype);
@@ -63,45 +63,77 @@ define(function(require, exports, module) {
 	}
 
 	function _createBody() {
-	  var grid = new GridLayout({
-	  	dimensions: [3, 2]
-	  });
+		var grid = new GridLayout({
+			dimensions: [3, 2]
+		});
 
-	  var gridView = [];
-	  grid.sequenceFrom(gridView);
+		var gridView = [];
+		grid.sequenceFrom(gridView);
 
-	  imgObject = {
-	  	1: './assets/pic1.jpg',
-	  	2: './assets/pic2.jpg',
-	  	3: './assets/pic3.jpg',
-	  	4: './assets/pic4.jpg',
-	  	5: './assets/pic5.jpg',
-	  	6: './assets/pic6.jpg'
-	  };
+		imgObject = {
+			1: './assets/pic1.jpg',
+			2: './assets/pic2.jpg',
+			3: './assets/pic3.jpg',
+			4: './assets/pic4.jpg',
+			5: './assets/pic5.jpg',
+			6: './assets/pic6.jpg'
+		};
 
-	  for(var i = 0; i < 8; i++) {
-	  	this.gridBox = new ImageSurface({
-	  		content: imgObject[1+i],
+		for(var i = 1; i < 8; i++) {
+			this.gridBox = new Surface({
+	  		// content: imgObject[1+i],
+	  		content: i,
 	  		size: [undefined, undefined],
 	  		properties: {
-	  			backgroundColor: "hsl(" + (i * 300 / 6) + ","+ (i * 10) + "%, "+ (i * 18) +"%)",
+	  			backgroundImage: 'url('+	imgObject[i] + ')',
+	  			backgroundRepeat: 'no-repeat',
+	  			backgroundSize: '100% 100%',
+	  			// backgroundColor: "hsl(" + (i * 300 / 6) + ","+ (i * 10) + "%, "+ (i * 18) +"%)",
 	  			color: "#404040",
 	  			lineHeight: '200px',
-	  			textAlign: 'center'
+	  			textAlign: 'center',
+	  			class: i
 	  		}
 	  	});
 
 	  	function _setListeners() {
-	  		this.gridBox.on('click', function() {
-	  			console.log(i);
-	  			this._eventOutput.emit('flipBoard');
-	  		}.bind(this));
-	  		this.grid.pipe(this._eventOutput);
+	  		console.log(this.gridbox);
+	  		// this.on('click', function() {
+	  		// 	console.log('gridbox: ', this.gridBox);
+	  		// 	console.log('backgroundImage: ',this.gridBox.properties);
+	  		// 	this._eventOutput.emit('flipBoard');
+	  		// }.bind(this.gridBox));
+	  		// this.grid.pipe(this._eventOutput);
 	  	}
+
+	  	// _setListeners.call(that);
 	  	gridView.push(this.gridBox);
 	  }
+	  for(var i = 0; i < gridView.length; i++) {
+	  	var holder = gridView[i];
+	  	// console.log(gridView[i]);
+	  	function _setListeners() {
+	  		this.on('click', function() {
+	  			console.log(this.content);
+	  		})
+	  	};
+	  	_setListeners.call(holder);
+	  }
+	  console.log(gridView);
 
-		this.layout.content.add(grid);
-	}
-	module.exports = PageView;
+	  // this.contentModifier = new Modifier({
+	  // 	transform: Transform.translate(0, this.options.screenHeight, 50)
+	  // });
+this.layout.content.add(grid);
+}
+
+
+PageView.prototype.animateContentIn = function(e) {
+	console.log('animateContentIn');
+
+	this.options.index = e.index;
+
+}
+
+module.exports = PageView;
 })

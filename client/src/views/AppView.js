@@ -17,7 +17,6 @@ define(function(require, exports, module) {
   	View.apply(this, arguments);
 
   	_createPageView.call(this);
-    // _setListeners.call(this);
   }
 
   AppView.prototype = Object.create(View.prototype);
@@ -39,12 +38,6 @@ define(function(require, exports, module) {
   AppView.prototype.flipList = function() {
     console.log('inAPP');
   }
-
-  // function _setListeners() {
-  //   this.pageView.on('click', function() {
-  //     console.log('app clicked!');
-  //   });
-  // }
 
   module.exports = AppView;
 })

@@ -24,8 +24,7 @@ define(function(require, exports, module) {
 
 		_createLayout.call(this);
 		_createHeader.call(this);
-		_createBody.call(this);
-		console.log('this', this);
+		_createGrid.call(this);
 
 		// _setListeners.call(this);
 	}
@@ -36,9 +35,6 @@ define(function(require, exports, module) {
 	PageView.DEFAULT_OPTIONS = {
 		headerSize: 44
 	};
-
-	var position = new Transitionable([0,0]);
-	var sync = new TouchSync();
 
 	function _createLayout() {
 		this.layout = new HeaderFooter({
@@ -63,7 +59,7 @@ define(function(require, exports, module) {
 		this.layout.header.add(backgroundSurface);
 	}
 
-	function _createBody() {
+	function _createGrid() {
 		var grid = new GridLayout({
 			dimensions: [3, 2]
 		});
@@ -113,7 +109,6 @@ define(function(require, exports, module) {
 		  	_listening.call(holder);
 		  }
 	  }
-	  console.log(gridView);
 	  _setListeners.call(this);
 
 	  // this.contentModifier = new Modifier({

@@ -6,7 +6,7 @@ define(function(require, exports, module) {
 	var HeaderFooter    = require('famous/views/HeaderFooterLayout');
 	var ImageSurface    = require('famous/surfaces/ImageSurface');
 	var InputSurface 		= require('famous/surfaces/InputSurface');
-	var EventHandler = require('famous/core/EventHandler');
+	var EventHandler    = require('famous/core/EventHandler');
 	var ContentView  	  = require('views/ContentView')
 	var GridView  		  = require('views/GridView')
 	var Modifier   		  = require("famous/core/Modifier");
@@ -14,10 +14,10 @@ define(function(require, exports, module) {
 	var Transitionable  = require("famous/transitions/Transitionable");
 	var Easing   				= require('famous/transitions/Easing');
 	var GridLayout 			= require("famous/views/GridLayout");
-	var Modifier    = require("famous/core/Modifier");
-	var TouchSync   = require("famous/inputs/TouchSync");
-	var Transitionable = require("famous/transitions/Transitionable");
-	var Easing = require('famous/transitions/Easing');
+	var Modifier 		    = require("famous/core/Modifier");
+	var TouchSync   		= require("famous/inputs/TouchSync");
+	var Transitionable 	= require("famous/transitions/Transitionable");
+	var Easing 					= require('famous/transitions/Easing');
 
 	eventHandler = new EventHandler();
 
@@ -28,9 +28,8 @@ define(function(require, exports, module) {
 		_createHeader.call(this);
 		_createGrid.call(this);
 
-		console.log('this1: ', this)
-
-		// _setListeners.call(this);
+		// console.log('this1: ', this)
+		_createEventsRouter.call(this);
 	}
 
 	PageView.prototype = Object.create(View.prototype);
@@ -83,11 +82,9 @@ define(function(require, exports, module) {
 			6: './assets/pic6.jpg'
 		};
 
+		// protects and privatizes gridbox
 		var gridBox;
 
-		// gridBox.on('click', function(){
-		// 	console.log('hi');
-		// })
 		for(var i = 1; i < 8; i++) {
 			gridBox = new ImageSurface({
 	  		// content: imgObject[1+i],
@@ -102,36 +99,43 @@ define(function(require, exports, module) {
 	  	gridView.push(gridBox);
 	  }
 
-	  function _setListeners() {
+	  function _setEmiters() {
 		  for(var i = 0; i < gridView.length; i++) {
 		  	var holder = gridView[i];
 		  	// console.log(gridView[i]);
 		  	function _listening() {
 		  		this.on('click', function() {
-		  			eventHandler.emit('hi');
-		  		  this.eventHandler.downstream.push('flipBoard');
+		  			eventHandler.emit('flipImage');
 		  			console.log(this.properties.class);
-		  			_animateContentIn.call(this);
+		  			// _animateContentIn.call(this);
 		  		}.bind(this))
 		  	};
 		  	_listening.call(holder);
 		  }
 	  }
-	  _setListeners.call(this);
+	  _setEmiters.call(this);
 
 		this.layout.content.add(grid);
 	}
 
+	// creates a router to allow binding of PageView to event
+	function _createEventsRouter () {
+		eventHandler.on('flipImage', this.animateContentIn.bind(this));
+	}
 
-function _animateContentIn(e) {
-	console.log('animateContentIn');
-	console.log('this2: ', this);
-	// this.layout.content.set(gridView[2]);
+	PageView.prototype.animateContentIn = function(e) {
+		console.log('animateContentIn');
+		console.log('this2: ', this);
+		// this.layout.content.set(gridView[2]);
 
-	  // this.contentModifier = new Modifier({
-	  // 	transform: Transform.translate(0, this.options.screenHeight, 50)
-	  // });
-}
+		  // this.contentModifier = new Modifier({
+		  // 	transform: Transform.translate(0, this.options.screenHeight, 50)
+		  // });
+	}
 
-module.exports = PageView;
+	// eventHandler.on('flipImage', function() {
+	// 	console.log(this);
+	// })
+
+	module.exports = PageView;
 })

@@ -19,6 +19,8 @@ define(function(require, exports, module) {
 	var Transitionable = require("famous/transitions/Transitionable");
 	var Easing = require('famous/transitions/Easing');
 
+	eventHandler = new EventHandler();
+
 	function PageView() {
 		View.apply(this, arguments);
 

@@ -36,7 +36,21 @@ db.knex.schema.hasTable('ncaaf').then(function(exists) {
       schedule.string('awayteam', 100);
       schedule.string('channel', 100);
     }).then(function() {
-      console.log('nfl table created');
+      console.log('ncaaf table created');
+    });
+  }
+});
+
+db.knex.schema.hasTable('mlb').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('mlb', function (schedule) {
+      schedule.increments('id').primary();
+      schedule.string('date', 100);
+      schedule.string('hometeam', 100);
+      schedule.string('awayteam', 100);
+      schedule.string('channel', 100);
+    }).then(function() {
+      console.log('mlb table created');
     });
   }
 });

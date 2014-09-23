@@ -27,6 +27,7 @@ define(function(require, exports, module) {
 
   function _createPageView() {
   	this.pageView = new PageView();
+    this.pageView.on('flipBoard', this.flipList);
   	this.pageModifier = new Modifier({
   		Transform: function() {
   			return Transform.translate(this.pageViewPos.get(), 0, 0);
@@ -35,11 +36,15 @@ define(function(require, exports, module) {
   	this.add(this.pageView);
   }
 
-  function _setListeners() {
-    this.pageView.on('click', function() {
-      console.log('app clicked!');
-    });
+  AppView.prototype.flipList = function() {
+    console.log('inAPP');
   }
+
+  // function _setListeners() {
+  //   this.pageView.on('click', function() {
+  //     console.log('app clicked!');
+  //   });
+  // }
 
   module.exports = AppView;
 })

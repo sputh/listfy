@@ -25,6 +25,7 @@ define(function(require, exports, module) {
 		_createLayout.call(this);
 		_createHeader.call(this);
 		_createBody.call(this);
+		console.log('this', this);
 
 		// _setListeners.call(this);
 	}
@@ -96,30 +97,24 @@ define(function(require, exports, module) {
 	  		}
 	  	});
 
-	  	function _setListeners() {
-	  		console.log(this.gridbox);
-	  		// this.on('click', function() {
-	  		// 	console.log('gridbox: ', this.gridBox);
-	  		// 	console.log('backgroundImage: ',this.gridBox.properties);
-	  		// 	this._eventOutput.emit('flipBoard');
-	  		// }.bind(this.gridBox));
-	  		// this.grid.pipe(this._eventOutput);
-	  	}
-
-	  	// _setListeners.call(that);
 	  	gridView.push(this.gridBox);
 	  }
-	  for(var i = 0; i < gridView.length; i++) {
-	  	var holder = gridView[i];
-	  	// console.log(gridView[i]);
-	  	function _setListeners() {
-	  		this.on('click', function() {
-	  			console.log(this.content);
-	  		})
-	  	};
-	  	_setListeners.call(holder);
+
+	  function _setListeners() {
+		  for(var i = 0; i < gridView.length; i++) {
+		  	var holder = gridView[i];
+		  	// console.log(gridView[i]);
+		  	function _listening() {
+		  		this.on('click', function() {
+		  		  this.eventHandler.downstream.push('flipBoard');
+		  			console.log(this.content);
+		  		}.bind(this))
+		  	};
+		  	_listening.call(holder);
+		  }
 	  }
 	  console.log(gridView);
+	  _setListeners.call(this);
 
 	  // this.contentModifier = new Modifier({
 	  // 	transform: Transform.translate(0, this.options.screenHeight, 50)

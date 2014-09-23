@@ -1,7 +1,7 @@
 var db = require('../config/db');
 
 var NCAAF = db.Model.extend({
-  tableName: 'ncaaf',
+  tableName: 'ncaaf'
 
 });
 

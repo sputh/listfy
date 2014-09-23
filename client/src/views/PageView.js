@@ -119,11 +119,16 @@ define(function(require, exports, module) {
 		this.layout.content.add(grid);
 	}
 
-	// creates a router to allow binding of PageView to event
+	// creates a router to allow binding of emitted events to PageView
 	function _createEventsRouter () {
+		// this will call animateContentIn when 'flipImage' is heard
+		// and it will pass in the 'this' that _createEventsRouter is
+		// attached to as the paramater for animateContentIn
 		eventHandler.on('flipImage', this.animateContentIn.bind(this));
 	}
 
+	// animateContentIn will ONLY run if the 'this' it is bound to is 
+	// an instance of PageView
 	PageView.prototype.animateContentIn = function(e) {
 		console.log('animateContentIn');
 		console.log('this2: ', this);

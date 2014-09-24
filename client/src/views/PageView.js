@@ -13,8 +13,6 @@ define(function(require, exports, module) {
 	function PageView() {
 		View.apply(this, arguments);
 
-		this.contentToggle = false;
-
 		_createLayout.call(this);
 		_createHeader.call(this);
 		_createContent.call(this);

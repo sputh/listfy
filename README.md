@@ -11,7 +11,7 @@ Listify is an application that provides lists of intersting information right at
 ##Table of Contents
 1) Dependencies
 2) API Documentation
-3) CRON Jobs
+3) CRON Jobs/data update schedule
 
 
 
@@ -23,7 +23,7 @@ Listify is an application that provides lists of intersting information right at
 ####URL Endpoint: /nfl
 
 ####GET weekly NFL schedule
-Based off [sportsdatallc](http://www.sportsdatallc.com/)
+Pulled from [sportsdatallc](http://www.sportsdatallc.com/)
 
 What you'll find in the json object:
 - id: unique id for each game
@@ -31,6 +31,45 @@ What you'll find in the json object:
 - hometeam: the home team
 - awayteam: the away team
 - channel: broadcast channel of the game
+
+
+###Weekly NCAA Football Schedule
+
+####URL Endpoint: /ncaaf
+
+####GET weekly NCAA Football schedule
+Pulled from [sportsdatallc](http://www.sportsdatallc.com/)
+
+What you'll find in the json object:
+- id: unique id for each game
+- date: date of the game
+- hometeam: the home team
+- awayteam: the away team
+- channel: broadcast channel of the game
+
+
+###Daily MLB Standings
+
+####URL Endpoint: /mlb
+
+####GET daily MLB standings
+Based off [sportsdatallc](http://www.sportsdatallc.com/)
+
+What you'll find in the json object:
+- id: unique id for each team
+- date: date of the current day
+- league: NL/AL league
+- division: central, west, east division
+- team: team name
+- wins: # wins
+- losses: # losses
+- gamesbehind: # games behind for playoff contention
+
+
+
+
+
+
 
 
 ###Books on single shelf

@@ -5,7 +5,6 @@ define(function(require, exports, module) {
 	var StateModifier   = require('famous/modifiers/StateModifier');
 	var HeaderFooter    = require('famous/views/HeaderFooterLayout');
 	var ImageSurface    = require('famous/surfaces/ImageSurface');
-	var InputSurface 		= require('famous/surfaces/InputSurface');
 	var EventHandler    = require('famous/core/EventHandler');
 	var ContentView  	  = require('views/ContentView')
 	var GridView  		  = require('views/GridView')
@@ -13,7 +12,6 @@ define(function(require, exports, module) {
 	var TouchSync   		= require("famous/inputs/TouchSync");
 	var Transitionable  = require("famous/transitions/Transitionable");
 	var Easing   				= require('famous/transitions/Easing');
-	var GridLayout 			= require("famous/views/GridLayout");
 	var TouchSync   		= require("famous/inputs/TouchSync");
 	var Transitionable 	= require("famous/transitions/Transitionable");
 	var Easing 					= require('famous/transitions/Easing');
@@ -21,15 +19,12 @@ define(function(require, exports, module) {
 	var eventHandler = new EventHandler();
 	var transitionable = new Transitionable();
 
-	// defines grid view on the same scope as PageView to allow accessibility
-	var gridView = [];
-
 	function PageView() {
 		View.apply(this, arguments);
 
 		_createLayout.call(this);
 		_createHeader.call(this);
-		_createGrid.call(this);
+		_createContentView.call(this);
 		_createListView.call(this);
 
 		// console.log('this1: ', this)
@@ -66,21 +61,25 @@ define(function(require, exports, module) {
 		this.layout.header.add(backgroundSurface);
 	}
 
+	function _createContentView() {
+		this.contentView = new ContentView();
+		this.layout.content.add(this.contentView);
+	}
 	function _createGrid() {
 
 		// defines Grid Layout
-		var grid = new GridLayout({
+		this.grid = new GridLayout({
 			dimensions: [3, 2]
 		});
 
 		this.contentModifier = new Modifier({
-			duration: 400,
-			curve: 'easeOut'
+			// duration: 400,
+			// curve: 'easeOut'
+			transform: Transform.translate(0,0,0)
 		});
 
-
 		// creates an array of all the surfaces of the grid
-		grid.sequenceFrom(gridView);
+		this.grid.sequenceFrom(gridView);
 
 		imgObject = {
 			1: './assets/pic1.jpg',
@@ -98,6 +97,7 @@ define(function(require, exports, module) {
 			gridBox = new ImageSurface({
 	  		// content: imgObject[1+i],
 	  		content: imgObject[i],
+	  		index: i,
 	  		size: [undefined, undefined],
 	  		properties: {
 	  			lineHeight: '200px',
@@ -111,11 +111,10 @@ define(function(require, exports, module) {
 		function _setEmiters() {
 			for(var i = 0; i < gridView.length; i++) {
 				var holder = gridView[i];
-		  	// console.log(gridView[i]);
 		  	function _listening() {
 		  		this.on('click', function() {
 		  			eventHandler.emit('flipImage');
-		  			console.log(this.properties.class);
+		  			console.log(this);
 		  			// _animateContentIn.call(this);
 		  		}.bind(this))
 		  	};
@@ -123,10 +122,9 @@ define(function(require, exports, module) {
 		  }
 		}
 		_setEmiters.call(this);
-		// console.log(contentModifier);
 
 		// Apply modifier to content
-		this.layout.content.add(this.contentModifier).add(grid);
+		this.layout.content.add(this.contentModifier).add(this.grid);
 	}
 
 	function _createListView() {
@@ -153,8 +151,9 @@ define(function(require, exports, module) {
 	// an instance of PageView
 	PageView.prototype.animateContentIn = function(e) {
 		console.log('in animateContentIn')
+		console.log(e);
 		// this.showNewView();
-		// this.layout.content.set(gridView[2]);
+		// this.layout.content.set(gridView[0]);
 		// transitionable.setTransform(Transform.translate(0,0,0), {
 		// 	duration: 400,
 		// 	curve: Easing.outCubic

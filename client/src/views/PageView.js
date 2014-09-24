@@ -19,7 +19,9 @@ define(function(require, exports, module) {
 	var Transitionable 	= require("famous/transitions/Transitionable");
 	var Easing 					= require('famous/transitions/Easing');
 
-	eventHandler = new EventHandler();
+	var eventHandler = new EventHandler();
+	var transitionable = new Transitionable();
+
 	// defines grid view on the same scope as PageView to allow accessibility
 	var gridView = [];
 
@@ -29,6 +31,7 @@ define(function(require, exports, module) {
 		_createLayout.call(this);
 		_createHeader.call(this);
 		_createGrid.call(this);
+		_createListView.call(this);
 
 		// console.log('this1: ', this)
 		_createEventsRouter.call(this);
@@ -97,12 +100,12 @@ define(function(require, exports, module) {
 	  			class: i
 	  		}
 	  	});
-	  	gridView.push(gridBox);
-	  }
+			gridView.push(gridBox);
+		}
 
-	  function _setEmiters() {
-		  for(var i = 0; i < gridView.length; i++) {
-		  	var holder = gridView[i];
+		function _setEmiters() {
+			for(var i = 0; i < gridView.length; i++) {
+				var holder = gridView[i];
 		  	// console.log(gridView[i]);
 		  	function _listening() {
 		  		this.on('click', function() {
@@ -113,10 +116,20 @@ define(function(require, exports, module) {
 		  	};
 		  	_listening.call(holder);
 		  }
-	  }
-	  _setEmiters.call(this);
+		}
+		_setEmiters.call(this);
 
 		this.layout.content.add(grid);
+	}
+
+	function _createListView() {
+		this.contentViw = new ContentView();
+		this.contentModifier = new Modifier({
+			// transform: Transform.translate(0, undefined, 50)
+			transform: function() {
+				return Transform.translate(this.transitionable.get(), 0, 0);
+			}.bind(this)
+		});
 	}
 
 	// creates a router to allow binding of emitted events to PageView
@@ -130,18 +143,17 @@ define(function(require, exports, module) {
 	// animateContentIn will ONLY run if the 'this' it is bound to is 
 	// an instance of PageView
 	PageView.prototype.animateContentIn = function(e) {
-		console.log('animateContentIn');
-		console.log('this2: ', this);
-		this.layout.content.set(gridView[2]);
-
-		  // this.contentModifier = new Modifier({
-		  // 	transform: Transform.translate(0, this.options.screenHeight, 50)
-		  // });
+		console.log('in animateContentIn')
+		transitionable.setTransform(Transform.translate(0,0,0), {
+			duration: 400,
+			curve: Easing.outCubic
+		});
+		console.log('finish transforming');
 	}
 
 	// eventHandler.on('flipImage', function() {
 	// 	console.log(this);
 	// })
 
-	module.exports = PageView;
+module.exports = PageView;
 })

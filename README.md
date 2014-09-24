@@ -1,3 +1,18 @@
+#Listify
+
+The flipboard of lists!
+
+Listify is an application that provides lists of intersting information right at your fingertips. You have the ability to see a preview of the contents before delving into the list, giving you all of the control. Try out our beautiful, seamless app and start consuming all the lists!
+
+###Team
+- [Jimmy Jea](github.com/jimjea)
+- [Samantha Puth](github.com/sputh)
+
+##Table of Contents
+
+
+
+
 
 ##API DOCUMENTATION
 

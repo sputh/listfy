@@ -14,7 +14,6 @@ define(function(require, exports, module) {
 	var Transitionable  = require("famous/transitions/Transitionable");
 	var Easing   				= require('famous/transitions/Easing');
 	var GridLayout 			= require("famous/views/GridLayout");
-	var Modifier 		    = require("famous/core/Modifier");
 	var TouchSync   		= require("famous/inputs/TouchSync");
 	var Transitionable 	= require("famous/transitions/Transitionable");
 	var Easing 					= require('famous/transitions/Easing');
@@ -74,6 +73,12 @@ define(function(require, exports, module) {
 			dimensions: [3, 2]
 		});
 
+		this.contentModifier = new Modifier({
+			duration: 400,
+			curve: 'easeOut'
+		});
+
+
 		// creates an array of all the surfaces of the grid
 		grid.sequenceFrom(gridView);
 
@@ -118,18 +123,22 @@ define(function(require, exports, module) {
 		  }
 		}
 		_setEmiters.call(this);
+		// console.log(contentModifier);
 
-		this.layout.content.add(grid);
+		// Apply modifier to content
+		this.layout.content.add(this.contentModifier).add(grid);
 	}
 
 	function _createListView() {
-		this.contentViw = new ContentView();
-		this.contentModifier = new Modifier({
-			// transform: Transform.translate(0, undefined, 50)
-			transform: function() {
-				return Transform.translate(this.transitionable.get(), 0, 0);
-			}.bind(this)
-		});
+		this.contentView = new ContentView();
+		// this.contentModifier = new Modifier();
+		// this.add(this.contentModifier).add(this.contentView);
+		// ({
+		// 	// transform: Transform.translate(0, undefined, 50)
+		// 	transform: function() {
+		// 		return Transform.translate(this.transitionable.get(), 0, 0);
+		// 	}.bind(this)
+		// });
 	}
 
 	// creates a router to allow binding of emitted events to PageView
@@ -144,12 +153,21 @@ define(function(require, exports, module) {
 	// an instance of PageView
 	PageView.prototype.animateContentIn = function(e) {
 		console.log('in animateContentIn')
-		transitionable.setTransform(Transform.translate(0,0,0), {
+		// this.showNewView();
+		// this.layout.content.set(gridView[2]);
+		// transitionable.setTransform(Transform.translate(0,0,0), {
+		// 	duration: 400,
+		// 	curve: Easing.outCubic
+		// });
+	}
+
+	PageView.prototype.showNewView = function() {
+		this.contentModifier.setTransform(Transform.translate(0,0,0), {
 			duration: 400,
-			curve: Easing.outCubic
+			curve: 'easeOut'
 		});
 		console.log('finish transforming');
-	}
+	};
 
 	// eventHandler.on('flipImage', function() {
 	// 	console.log(this);

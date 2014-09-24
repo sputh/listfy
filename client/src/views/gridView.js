@@ -14,10 +14,12 @@ define(function(require, exports, module) {
 		View.apply(this, arguments);
 
 		_createGrid.call(this);
+    _setEmiters.call(this);
 	}
 
-  GridView.prototype = Object.create(View.prototype);
-  GridView.prototype.constructor = GridView;
+	GridView.prototype = Object.create(View.prototype);
+	GridView.prototype.constructor = GridView;
+
 	var gridView = [];
 	var eventHandler = new EventHandler();
 
@@ -28,9 +30,9 @@ define(function(require, exports, module) {
     });
 
     this.contentModifier = new Modifier({
-      // duration: 400,
-      // curve: 'easeOut'
-      transform: Transform.translate(0,0,0)
+    	duration: 400,
+    	curve: 'easeOut',
+    	transform: Transform.translate(0,0,0)
     });
 
     // creates an array of all the surfaces of the grid
@@ -76,11 +78,25 @@ define(function(require, exports, module) {
     		_listening.call(holder);
     	}
     }
-    _setEmiters.call(this);
+    //_setEmiters.call(this);
 
     // Apply modifier to content
     this.add(this.contentModifier).add(this.grid);
-    this.add(this.grid);
   }
+
+  function _setEmiters() {
+  	for(var i = 0; i < gridView.length; i++) {
+  		var holder = gridView[i];
+  		function _listening() {
+  			this.on('click', function() {
+  				eventHandler.emit('flipImage');
+  				console.log(this);
+                // _animateContentIn.call(this);
+              }.bind(this))
+  		};
+  		_listening.call(holder);
+  	}
+  }
+
   module.exports = GridView;
 });

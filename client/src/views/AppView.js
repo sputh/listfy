@@ -1,6 +1,5 @@
 define(function(require, exports, module) {
   var View            = require('famous/core/View');
-  var Surface         = require('famous/core/Surface');
   var Modifier        = require('famous/core/Modifier');
   var Transform       = require('famous/core/Transform');
   var StateModifier   = require('famous/modifiers/StateModifier');
@@ -10,9 +9,9 @@ define(function(require, exports, module) {
   var MouseSync       = require('famous/inputs/MouseSync');
   var TouchSync       = require('famous/inputs/TouchSync');
   var FastClick       = require('famous/inputs/FastClick');
-  GenericSync.register({'mouse': MouseSync, 'touch': TouchSync});
+  var PageView        = require('views/PageView');
 
-  var PageView = require('views/PageView');
+  GenericSync.register({'mouse': MouseSync, 'touch': TouchSync});
 
   function AppView() {
   	View.apply(this, arguments);
@@ -33,7 +32,7 @@ define(function(require, exports, module) {
   			return Transform.translate(this.pageViewPos.get(), 0, 0);
   		}.bind(this)
   	});
-  	this.add(this.pageView);
+  	this.add(this.pageModifier).add(this.pageView);
   }
 
   AppView.prototype.flipList = function() {

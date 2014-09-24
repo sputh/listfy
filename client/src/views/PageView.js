@@ -22,6 +22,8 @@ define(function(require, exports, module) {
 	function PageView() {
 		View.apply(this, arguments);
 
+		this.contentToggle = false;
+
 		_createLayout.call(this);
 		_createHeader.call(this);
 		_createGridView.call(this);
@@ -107,9 +109,21 @@ define(function(require, exports, module) {
 		console.log('finish transforming');
 	};
 
-	// eventHandler.on('flipImage', function() {
-	// 	console.log(this);
-	// })
+	function _setListeners() {
+		this.contentView.on('contentToggle', this.toggleContent.bind(this));
+	}
+
+	PageView.prototype.toggleContent = function() {
+		this.contentToggle ? this.showList() : this.showGrid();
+	};
+
+	PageView.prototype.showList = function() {
+
+	};
+
+	PageView.prototype.showGrid = function() {
+
+	};
 
 module.exports = PageView;
 })

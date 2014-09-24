@@ -8,7 +8,7 @@ define(function(require, exports, module) {
   var ImageSurface  = require('famous/surfaces/ImageSurface');
   var PageView      = require('views/PageView')
   var GridLayout    = require("famous/views/GridLayout");
-  var Modifier          = require("famous/core/Modifier");
+  var Modifier      = require("famous/core/Modifier");
 
   // defines grid view on the same scope as PageView to allow accessibility
   var gridView = [];
@@ -86,5 +86,6 @@ define(function(require, exports, module) {
         this.add(this.contentModifier).add(this.grid);
         this.add(this.grid);
     }
+    
     module.exports = ContentView;
 });

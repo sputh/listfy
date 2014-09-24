@@ -1,12 +1,3 @@
-#Listify
-
-The flipboard of lists!
-
-
-
-
-
-
 
 ##API DOCUMENTATION
 

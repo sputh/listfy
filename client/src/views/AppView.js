@@ -1,3 +1,5 @@
+/*** AppView.js ***/
+
 define(function(require, exports, module) {
   var View            = require('famous/core/View');
   var Modifier        = require('famous/core/Modifier');

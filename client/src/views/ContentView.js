@@ -5,9 +5,8 @@ define(function(require, exports, module) {
   var Surface       = require('famous/core/Surface');
   var Transform     = require('famous/core/Transform');
   var StateModifier = require('famous/modifiers/StateModifier');
-  var ImageSurface  = require('famous/surfaces/ImageSurface');
   var PageView      = require('views/PageView')
-  var GridLayout    = require("famous/views/GridLayout");
+  var GridView          = require('views/GridView')
   var Modifier      = require("famous/core/Modifier");
 
   // defines grid view on the same scope as PageView to allow accessibility
@@ -16,7 +15,8 @@ define(function(require, exports, module) {
   function ContentView() {
     View.apply(this, arguments);
 
-    _createGrid.call(this);
+    _createBoard.call(this);
+    // _createGrid.call(this);
 
     }
 
@@ -24,6 +24,12 @@ define(function(require, exports, module) {
     ContentView.prototype.constructor = ContentView;
 
     ContentView.DEFAULT_OPTIONS = {};
+    
+    function _createBoard() {
+        this.board = new GridView();
+        this.add(this.board);
+    }
+
     function _createGrid() {
 
         // defines Grid Layout

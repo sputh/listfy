@@ -1,37 +1,85 @@
+/*** GridView.js ***/
+
 define(function(require, exports, module) {
 	var View 				= require('famous/core/View');
 	var Engine 			= require("famous/core/Engine");
 	var Surface 		= require("famous/core/Surface");
-	var GridLayout 	= require("famous/views/GridLayout");	
+	var ImageSurface  = require('famous/surfaces/ImageSurface');
+	var GridLayout 	= require("famous/views/GridLayout");
+	var Modifier      = require("famous/core/Modifier");
+	var Transform     = require('famous/core/Transform');
 	
+	var gridView = [];
+
 	function GridView(options) {
-		console.log(options.dimensions);
 		View.apply(this, arguments);
 
 		_createGrid.call(this);
 	}
 
+  GridView.prototype = Object.create(View.prototype);
+  GridView.prototype.constructor = GridView;
+
 	function _createGrid() {
-		var grid = new GridLayout({
-			dimensions: this.options
-		});
+    // defines Grid Layout
+    this.grid = new GridLayout({
+    	dimensions: [3, 2]
+    });
 
-		var gridSurfaces = [];
-		grid.sequenceFrom(gridSurfaces);
+    this.contentModifier = new Modifier({
+      // duration: 400,
+      // curve: 'easeOut'
+      transform: Transform.translate(0,0,0)
+    });
 
-		for(var i = 0; i < 8; i++) {
-			gridSurfaces.push(new Surface({
-				content: "panel " + (i + 1),
-				size: [undefined, undefined],
-				properties: {
-					backgroundColor: "hsl(" + (i * 360 / 8) + ", 100%, 50%)",
-					color: "#404040",
-					lineHeight: '200px',
-					textAlign: 'center'
-				}
-			}));
-		}
-	}
-	module.exports = GridView;
+    // creates an array of all the surfaces of the grid
+    this.grid.sequenceFrom(gridView);
+
+    imgObject = {
+    	1: './assets/pic1.jpg',
+    	2: './assets/pic2.jpg',
+    	3: './assets/pic3.jpg',
+    	4: './assets/pic4.jpg',
+    	5: './assets/pic5.jpg',
+    	6: './assets/pic6.jpg'
+    };
+
+    // protects and privatizes gridbox
+    var gridBox;
+
+    for(var i = 1; i < 8; i++) {
+    	gridBox = new ImageSurface({
+        // content: imgObject[1+i],
+        content: imgObject[i],
+        index: i,
+        size: [undefined, undefined],
+        properties: {
+        	lineHeight: '200px',
+        	textAlign: 'center',
+        	class: i
+        }
+      });
+    	gridView.push(gridBox);
+    }
+
+    function _setEmiters() {
+    	for(var i = 0; i < gridView.length; i++) {
+    		var holder = gridView[i];
+    		function _listening() {
+    			this.on('click', function() {
+    				eventHandler.emit('flipImage');
+    				console.log(this);
+                // _animateContentIn.call(this);
+              }.bind(this))
+    		};
+    		_listening.call(holder);
+    	}
+    }
+    _setEmiters.call(this);
+
+    // Apply modifier to content
+    this.add(this.contentModifier).add(this.grid);
+    this.add(this.grid);
+  }
+  module.exports = GridView;
 });
- 

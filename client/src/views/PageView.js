@@ -7,7 +7,6 @@ define(function(require, exports, module) {
 	var ImageSurface    = require('famous/surfaces/ImageSurface');
 	var EventHandler    = require('famous/core/EventHandler');
 	var ContentView  	  = require('views/ContentView')
-	var GridView  		  = require('views/GridView')
 	var Modifier   		  = require("famous/core/Modifier");
 	var TouchSync   		= require("famous/inputs/TouchSync");
 	var Transitionable  = require("famous/transitions/Transitionable");
@@ -16,8 +15,8 @@ define(function(require, exports, module) {
 	var Transitionable 	= require("famous/transitions/Transitionable");
 	var Easing 					= require('famous/transitions/Easing');
 
-	var eventHandler = new EventHandler();
-	var transitionable = new Transitionable();
+	var eventHandler 		= new EventHandler();
+	var transitionable 	= new Transitionable();
 
 	function PageView() {
 		View.apply(this, arguments);

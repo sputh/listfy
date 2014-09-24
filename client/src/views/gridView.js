@@ -47,11 +47,11 @@ define(function(require, exports, module) {
     	6: './assets/pic6.jpg'
     };
 
-    // protects and privatizes gridbox
-    var gridBox;
+    // protects and privatizes gridArray
+    var gridArray;
 
     for(var i = 1; i < 8; i++) {
-    	gridBox = new ImageSurface({
+    	gridArray = new ImageSurface({
         // content: imgObject[1+i],
         content: imgObject[i],
         index: i,
@@ -62,23 +62,8 @@ define(function(require, exports, module) {
         	class: i
         }
       });
-    	gridView.push(gridBox);
+    	gridView.push(gridArray);
     }
-
-    function _setEmiters() {
-    	for(var i = 0; i < gridView.length; i++) {
-    		var holder = gridView[i];
-    		function _listening() {
-    			this.on('click', function() {
-    				eventHandler.emit('flipImage');
-    				console.log(this);
-                // _animateContentIn.call(this);
-              }.bind(this))
-    		};
-    		_listening.call(holder);
-    	}
-    }
-    //_setEmiters.call(this);
 
     // Apply modifier to content
     this.add(this.contentModifier).add(this.grid);
@@ -90,9 +75,10 @@ define(function(require, exports, module) {
   		function _listening() {
   			this.on('click', function() {
   				eventHandler.emit('flipImage');
-  				console.log(this);
-                // _animateContentIn.call(this);
-              }.bind(this))
+  				console.log(i, gridView.length);
+  				// console.log(this);
+            // _animateContentIn.call(this);
+          }.bind(this))
   		};
   		_listening.call(holder);
   	}

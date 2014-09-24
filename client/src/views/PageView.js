@@ -25,8 +25,8 @@ define(function(require, exports, module) {
 
 		_createLayout.call(this);
 		_createHeader.call(this);
-		_createGridView.call(this);
-		_createListView.call(this);
+		_createContent.call(this);
+		// _createListView.call(this);
 
 		// console.log('this1: ', this)
 		_createEventsRouter.call(this);
@@ -62,7 +62,7 @@ define(function(require, exports, module) {
 		this.layout.header.add(backgroundSurface);
 	}
 
-	function _createGridView() {
+	function _createContent() {
 		this.contentView = new ContentView();
 		this.layout.content.add(this.contentView);
 	}

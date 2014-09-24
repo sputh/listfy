@@ -21,7 +21,7 @@ define(function(require, exports, module) {
 	GridView.prototype.constructor = GridView;
 
 	var gridView = [];
-	var eventHandler = new EventHandler();
+	var gridEventHandler = new EventHandler();
 
 	function _createGrid() {
     // defines Grid Layout
@@ -29,6 +29,7 @@ define(function(require, exports, module) {
     	dimensions: [3, 2]
     });
 
+		this.gridEventHandler = gridEventHandler;
     this.contentModifier = new Modifier({
     	duration: 400,
     	curve: 'easeOut',
@@ -74,7 +75,7 @@ define(function(require, exports, module) {
   		var holder = gridView[i];
   		function _listening() {
   			this.on('click', function() {
-  				eventHandler.emit('flipImage');
+  				gridEventHandler.emit('blowImage');
   				console.log(this);
             // _animateContentIn.call(this);
           }.bind(this))

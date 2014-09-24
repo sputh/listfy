@@ -10,15 +10,16 @@ define(function (require, exports, module) {
 	var GridView      = require('views/GridView');
 	var ListView			= require('views/ListView');
 
-	var gridView = [];
-
 	function ContentView() {
 		View.apply(this, arguments);
 
 		this.contentToggle = false;
-		_createBoard.call(this);
 		_createListView.call(this);
+		_createBoard.call(this);
 	}
+
+	var gridEventHandler = GridView.gridEventHandler;
+	console.log(gridEventHandler)
 
 	ContentView.prototype = Object.create(View.prototype);
 	ContentView.prototype.constructor = ContentView;
@@ -33,6 +34,12 @@ define(function (require, exports, module) {
 	function _createListView() {
 		this.board = new ListView();
 		this.add(this.board);
+	}
+
+	function _setListeners() {
+		this.on('blowImage', function() {
+			console.log('hi');
+		});
 	}
 	module.exports = ContentView;
 });

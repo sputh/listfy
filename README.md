@@ -1,28 +1,28 @@
+#Listify
+
+The flipboard of lists!
+
+
+
+
+
+
+
 ##API DOCUMENTATION
 
-###User shelves
+###Weekly NFL Schedule
 
-###URL Endpoint: /userShelves
+###URL Endpoint: /nfl
 
-####GET names of all of a user's shelves
-Based off Goodreads' [shelves.list](https://www.goodreads.com/api#shelves.list)
+####GET weekly NFL schedule
+Based off [sportsdatallc](http://www.sportsdatallc.com/)
 
-Params:
-- key: Developer key (required)
-- id: Goodreads user id (required)
-- page: Page of results; 1-N (optional; default 1)
-  - [note: it appears that goodreads returns the full number of shelves and that the page parameter is irrelevant]
-
-####POST new shelf
-Based off Goodreads' [user_shelves.create](https://www.goodreads.com/api#user_shelves.create)   
-
-Params:
-- key: Developer key (required)
-- id: Goodreads user id (required)
-- name: Name of the new shelf (required)
-- exclusive_flag: Whether shelf should be exclusive, i.e. books on this shelf cannot be on other shelves; 'true' or 'false' (optional; default 'false')
-- sortable_flag: Whether to enable shelf sorting; 'true' or 'false' (optional; default 'false')
-- featured: Whether to feature the shelf at the top of profile; 'true' or 'false' (optional; default 'false')
+What you'll find in the json object:
+- id: unique id for each game
+- date: date of the game
+- hometeam: the home team
+- awayteam: the away team
+- channel: broadcast channel of the game
 
 
 ###Books on single shelf

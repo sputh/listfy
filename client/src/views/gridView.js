@@ -75,8 +75,7 @@ define(function(require, exports, module) {
   		function _listening() {
   			this.on('click', function() {
   				eventHandler.emit('flipImage');
-  				console.log(i, gridView.length);
-  				// console.log(this);
+  				console.log(this);
             // _animateContentIn.call(this);
           }.bind(this))
   		};

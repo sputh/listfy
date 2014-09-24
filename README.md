@@ -4,12 +4,14 @@ The flipboard of lists!
 
 Listify is an application that provides lists of intersting information right at your fingertips. You have the ability to see a preview of the contents before delving into the list, giving you all of the control. Try out our beautiful, seamless app and start consuming all the lists!
 
-###Team
+####Team
 - [Jimmy Jea](github.com/jimjea)
 - [Samantha Puth](github.com/sputh)
 
 ##Table of Contents
-
+1) Dependencies
+2) API Documentation
+3) CRON Jobs
 
 
 
@@ -18,7 +20,7 @@ Listify is an application that provides lists of intersting information right at
 
 ###Weekly NFL Schedule
 
-###URL Endpoint: /nfl
+####URL Endpoint: /nfl
 
 ####GET weekly NFL schedule
 Based off [sportsdatallc](http://www.sportsdatallc.com/)

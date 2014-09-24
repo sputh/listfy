@@ -9,16 +9,17 @@ Listify is an application that provides lists of intersting information right at
 - [Samantha Puth](github.com/sputh)
 
 ##Table of Contents
-1) Dependencies
-2) API Documentation
-3) CRON Jobs/data update schedule
+1. Dependencies
+..* Installing dependencies
+2. API Documentation
+3. Cronjobs/database update schedule
 
 
 
 
-#API DOCUMENTATION
+##API DOCUMENTATION
 ___
-###Weekly NFL Schedule
+###**Weekly NFL Schedule**
 
 ####URL Endpoint: /nfl
 
@@ -33,7 +34,7 @@ What you'll find in the json object:
 - channel: broadcast channel of the game
 
 
-###Weekly NCAA Football Schedule
+###**Weekly NCAA Football Schedule**
 
 ####URL Endpoint: /ncaaf
 
@@ -48,7 +49,7 @@ What you'll find in the json object:
 - channel: broadcast channel of the game
 
 
-###Daily MLB Standings
+###**Daily MLB Standings**
 
 ####URL Endpoint: /mlb
 
@@ -65,3 +66,16 @@ What you'll find in the json object:
 - losses: # losses
 - gamesbehind: # games behind for playoff contention
 
+##Cronjobs and Frequency of Database Update
+___
+###**NFL Schedule**
+
+Updated every Tuesday at 2am
+
+###**NCAA Football Schedule**
+
+Updated every Monday at 2am
+
+###**MLB Standings**
+
+Updated everyday at 2am

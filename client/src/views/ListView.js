@@ -22,7 +22,7 @@ define(function(require, exports, module) {
 
   function _createContent() {
     var background = new ImageSurface({content: './assets/puppies.jpeg'});
-    this..add(background);
+    this.add(background);
   }
 
 module.exports = ListView;

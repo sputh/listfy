@@ -1,16 +1,15 @@
 /*** GridView.js ***/
 
 define(function(require, exports, module) {
-	var View 				= require('famous/core/View');
-	var Engine 			= require("famous/core/Engine");
-	var Surface 		= require("famous/core/Surface");
+	var View 					= require('famous/core/View');
+	var Engine 				= require("famous/core/Engine");
+	var Surface 			= require("famous/core/Surface");
 	var ImageSurface  = require('famous/surfaces/ImageSurface');
-	var GridLayout 	= require("famous/views/GridLayout");
+	var GridLayout 		= require("famous/views/GridLayout");
 	var Modifier      = require("famous/core/Modifier");
 	var Transform     = require('famous/core/Transform');
+	var EventHandler  = require('famous/core/EventHandler');
 	
-	var gridView = [];
-
 	function GridView(options) {
 		View.apply(this, arguments);
 
@@ -19,6 +18,8 @@ define(function(require, exports, module) {
 
   GridView.prototype = Object.create(View.prototype);
   GridView.prototype.constructor = GridView;
+	var gridView = [];
+	var eventHandler = new EventHandler();
 
 	function _createGrid() {
     // defines Grid Layout

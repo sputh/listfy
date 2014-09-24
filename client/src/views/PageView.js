@@ -17,7 +17,6 @@ define(function(require, exports, module) {
 		_createHeader.call(this);
 		_createContent.call(this);
 
-		_createEventsRouter.call(this);
 	}
 
 	PageView.prototype = Object.create(View.prototype);

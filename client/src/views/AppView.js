@@ -35,9 +35,5 @@ define(function(require, exports, module) {
   	this.add(this.pageModifier).add(this.pageView);
   }
 
-  AppView.prototype.flipList = function() {
-    console.log('inAPP');
-  }
-
   module.exports = AppView;
 })

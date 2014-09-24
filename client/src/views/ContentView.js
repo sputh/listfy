@@ -14,6 +14,8 @@ define(function(require, exports, module) {
 
   function ContentView() {
     View.apply(this, arguments);
+    
+    this.contentToggle = false;
 
     _createBoard.call(this);
     }
@@ -30,3 +32,60 @@ define(function(require, exports, module) {
     
     module.exports = ContentView;
 });
+
+function _createListView() {
+        this.contentView = new ContentView();
+        // this.contentModifier = new Modifier();
+        // this.add(this.contentModifier).add(this.contentView);
+        // ({
+        //  // transform: Transform.translate(0, undefined, 50)
+        //  transform: function() {
+        //      return Transform.translate(this.transitionable.get(), 0, 0);
+        //  }.bind(this)
+        // });
+    }
+
+    // creates a router to allow binding of emitted events to PageView
+    function _createEventsRouter () {
+        // this will call animateContentIn when 'flipImage' is heard
+        // and it will pass in the 'this' that _createEventsRouter is
+        // attached to as the paramater for animateContentIn
+        eventHandler.on('flipImage', this.animateContentIn.bind(this));
+    }
+
+    // animateContentIn will ONLY run if the 'this' it is bound to is 
+    // an instance of PageView
+    PageView.prototype.animateContentIn = function(e) {
+        console.log('in animateContentIn')
+        console.log(e);
+        // this.showNewView();
+        // this.layout.content.set(gridView[0]);
+        // transitionable.setTransform(Transform.translate(0,0,0), {
+        //  duration: 400,
+        //  curve: Easing.outCubic
+        // });
+    }
+
+    PageView.prototype.showNewView = function() {
+        this.contentModifier.setTransform(Transform.translate(0,0,0), {
+            duration: 400,
+            curve: 'easeOut'
+        });
+        console.log('finish transforming');
+    };
+
+    function _setListeners() {
+        this.contentView.on('contentToggle', this.toggleContent.bind(this));
+    }
+
+    PageView.prototype.toggleContent = function() {
+        this.contentToggle ? this.showList() : this.showGrid();
+    };
+
+    PageView.prototype.showList = function() {
+
+    };
+
+    PageView.prototype.showGrid = function() {
+
+    };

@@ -20,8 +20,16 @@ define(function(require, exports, module) {
 	GridView.prototype = Object.create(View.prototype);
 	GridView.prototype.constructor = GridView;
 
-	var gridView = [];
+	var gridArray = [];
 	var gridEventHandler = new EventHandler();
+
+  var initialTime = Date.now();
+  var flipImageModifier = new Modifier({
+  	origin: [0.5, 0.5],
+  	transform: function() {
+  		return Transform.rotateY(.002 * (Date.now() - initialTime));
+  	}
+  })
 
 	function _createGrid() {
     // defines Grid Layout
@@ -29,15 +37,8 @@ define(function(require, exports, module) {
     	dimensions: [3, 2]
     });
 
-		this.gridEventHandler = gridEventHandler;
-    this.contentModifier = new Modifier({
-    	duration: 400,
-    	curve: 'easeOut',
-    	transform: Transform.translate(0,0,0)
-    });
-
     // creates an array of all the surfaces of the grid
-    this.grid.sequenceFrom(gridView);
+    this.grid.sequenceFrom(gridArray);
 
     imgObject = {
     	1: './assets/pic1.jpg',
@@ -48,11 +49,11 @@ define(function(require, exports, module) {
     	6: './assets/pic6.jpg'
     };
 
-    // protects and privatizes gridArray
-    var gridArray;
+    // protects and privatizes gridBox
+    var gridBox;
 
     for(var i = 1; i < 8; i++) {
-    	gridArray = new ImageSurface({
+    	gridBox = new ImageSurface({
         // content: imgObject[1+i],
         content: imgObject[i],
         index: i,
@@ -63,7 +64,10 @@ define(function(require, exports, module) {
         	class: i
         }
       });
-    	gridView.push(gridArray);
+      gridBox.on('click', function() {
+      	console.log('im');
+      });
+    	gridArray.push(gridBox);
     }
 
     // Apply modifier to content
@@ -71,10 +75,12 @@ define(function(require, exports, module) {
   }
 
   function _setEmiters() {
-  	for(var i = 0; i < gridView.length; i++) {
-  		var holder = gridView[i];
+  	for(var i = 0; i < gridArray.length; i++) {
+  		var holder = gridArray[i];
   		function _listening() {
   			this.on('click', function() {
+  				// on 'click' --> flip image
+  				// after 'flipImage' --> blow up
   				gridEventHandler.emit('blowImage');
   				console.log(this);
             // _animateContentIn.call(this);

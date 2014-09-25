@@ -17,6 +17,8 @@ define(function(require, exports, module) {
     _setEmiters.call(this);
 	}
 
+	var spinContext = Engine.createContext();
+
 	GridView.prototype = Object.create(View.prototype);
 	GridView.prototype.constructor = GridView;
 
@@ -65,7 +67,8 @@ define(function(require, exports, module) {
         }
       });
       gridBox.on('click', function() {
-      	console.log('im');
+      	console.log(this);
+      	spinContext.add(flipImageModifier).add(gridBox);
       });
     	gridArray.push(gridBox);
     }

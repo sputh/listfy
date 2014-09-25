@@ -67,10 +67,10 @@ define(function(require, exports, module) {
         }
       });
 
-      // gridBox.on('click', function() {
-      // 	console.log(this);
-      // 	spinContext.add(flipImageModifier).add(gridBox);
-      // });
+      gridBox.on('click', function() {
+      	console.log(this);
+      	// spinContext.add(flipImageModifier).add(gridBox);
+      });
 
     	var gridContext = Engine.createContext()
     	// var gridView = gridContext.add(gridBox);

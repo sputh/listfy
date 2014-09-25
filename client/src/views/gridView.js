@@ -14,7 +14,7 @@ define(function(require, exports, module) {
 		View.apply(this, arguments);
 
 		_createGrid.call(this);
-    _setEmiters.call(this);
+    // _setEmiters.call(this);
 	}
 
 	var spinContext = Engine.createContext();
@@ -66,15 +66,21 @@ define(function(require, exports, module) {
         	class: i
         }
       });
-      gridBox.on('click', function() {
-      	console.log(this);
-      	spinContext.add(flipImageModifier).add(gridBox);
-      });
+
+      // gridBox.on('click', function() {
+      // 	console.log(this);
+      // 	spinContext.add(flipImageModifier).add(gridBox);
+      // });
+
+    	var gridContext = Engine.createContext()
+    	// var gridView = gridContext.add(gridBox);
+
     	gridArray.push(gridBox);
     }
 
     // Apply modifier to content
-    this.add(this.contentModifier).add(this.grid);
+    this.add(this.grid);
+    console.log(this.grid);
   }
 
   function _setEmiters() {

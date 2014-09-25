@@ -14,7 +14,7 @@ define(function (require, exports, module) {
 		View.apply(this, arguments);
 
 		this.contentToggle = false;
-		_createListView.call(this);
+		// _createListView.call(this);
 		_createBoard.call(this);
 	}
 
